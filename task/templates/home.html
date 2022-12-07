@@ -3,6 +3,15 @@
 {% block title %} Home {% endblock %}
 
 {% block content  %} 
-    <h1>HOME</h1>
-    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae pariatur id, quaerat labore reprehenderit quasi amet nam rerum cumque perferendis fuga voluptatum magnam? Beatae amet quaerat delectus, provident blanditiis totam?</p>
+    <section class="card card-body">
+        <h1 class="display-1 text-center">DJANGO APLICATION</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
+        Facere dolore minima fuga quae dolorem ipsum nemo esse error magnam recusandae distinctio, <br>
+        harum, dolores asperiores similique suscipit reiciendis. Eligendi, nisi maiores?
+        </p>
+        <div class="text-center">
+            <a class="btn btn-primary" href="{% url 'signin' %}">SIGN IN</a>
+            <a class="btn btn-primary" href="{% url 'signup' %}">SIGN UP</a>
+        </div>
+    </section>
 {% endblock  %}
