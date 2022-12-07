@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %} Details {% endblock %}
+
+{% block content %}
+    <h1>TASK DETAIL!</h1>
+    <h2>Titulo de tarea: {{task.title}}</h2>
+    <h2>Descripcion de tarea: {{task.description}}</h2>
+    <h3>Important?: {{task.important}}</h3>
+    <h3>Completed?: {{task.date_complete}} </h3>
+    <br>
+    <h3>UPDATE TASK!</h3>
+    <form action=""method='POST'>
+        {{error}}
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Update</button>
+    </form>
+
+    <form action="{% url 'complete_task' task.id %}" method='POST'>
+        {% csrf_token %}
+        <button>Complete</button>
+    </form>
+    
+{% endblock %}

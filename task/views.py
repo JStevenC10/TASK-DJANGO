@@ -1,6 +1,8 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.utils import timezone
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
@@ -44,10 +46,12 @@ def signup(request):
             'form' : form
         })
 
+@login_required
 def tasks(request):
     all_tasks = Task.objects.filter(user=request.user)
     return render(request, 'tasks.html', {'task': all_tasks})
 
+@login_required
 def add_task(request):
     if request.method == 'POST':
         try:
@@ -63,6 +67,34 @@ def add_task(request):
         task_form = TaskForm()
         return render(request, 'addTask.html', {'form':task_form})
 
+@login_required
+def task_detail(request, task_id):
+    task = get_object_or_404(Task, id=task_id)
+    if request.method == 'POST':
+        try:
+            form = TaskForm(request.POST, instance=task)
+            form.save()
+            return redirect('/tasks/')
+        except ValueError:
+            return render(request, 'tdetail.html', {'task':task, 'form':form, 'error': 'error al actualizar'})
+    else:
+        form = TaskForm(instance=task)
+        return render(request, 'tdetail.html', {'task':task, 'form':form})
+
+@login_required
+def complete_task(request, task_id):
+    task = get_object_or_404(Task, id=task_id)
+    task.date_complete = timezone.now()
+    task.save()
+    return redirect(to=tasks)
+
+@login_required
+def delete_task(request, task_id):
+    task = Task.objects.get(id=task_id)
+    task.delete()
+    return redirect(to=tasks)
+
+@login_required
 def signout(request):
     logout(request)
     return redirect(to=index)

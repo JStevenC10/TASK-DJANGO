@@ -6,9 +6,18 @@
     <h1>TASKS!</h1>
     <ul>
         {% for task in task %}
-            <li><h1>{{task.title}}</h1></li>
-            <li>{{task.description}}</li>
-            <li>{{task.user.username}}</li>
+            {% if task.date_complete == None %}
+                <li><h1>{{task.title}}</h1></li>
+                <li><a href="{% url 'details' task.id %}">task detail</a></li>
+                <li><a href="{% url 'delete' task.id %}">Delete task</a></li>
+                <strong>incomplete</strong>
+            {% else %}
+                <li><h1>{{task.title}}</h1></li>
+                <li><a href="{% url 'details' task.id %}">task detail</a></li>
+                <li><a href="{% url 'delete' task.id %}">Delete task</a></li>
+                <strong>COMPLETED</strong>
+            {% endif %} 
+
         {% endfor %}
     </ul>
     

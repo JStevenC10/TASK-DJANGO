@@ -10,10 +10,10 @@
 <body>
     <nav>
         <li><a href="{% url 'index'  %}">HOME</a></li>
-        
-        <li><a href="{% url 'tasks'  %}">TASK</a></li>
         {% if user.is_authenticated %}
+            <li><a href="{% url 'tasks'  %}">Task</a></li>
             <li><a href="{% url 'signout'  %}">LOGOUT</a></li>
+            <li><a href="{% url 'add_task' %}">Add task</a></li>
         {% else %}
             <li><a href="{% url 'signup'  %}">SIGN UP</a></li>
             <li><a href="{% url 'signin'  %}">SIGN IN</a></li>
