@@ -8,15 +8,20 @@
         <ul class="list-group">
             {% for task in task %}
                 {% if task.date_complete == None %}
-                    <li><h1>{{task.title}}</h1></li>
-                    <li><a href="{% url 'details' task.id %}">task detail</a></li>
-                    <li><a href="{% url 'delete' task.id %}">Delete task</a></li>
-                    <strong>incomplete</strong>
+                    <div class="container">
+                        <li><h1 class="fw-bold text-danger">{{task.title}}</h1></li>
+                        <a class="btn btn-primary" href="{% url 'details' task.id %}">task detail</a>
+                        <a class="btn btn-danger" href="{% url 'delete' task.id %}">Delete task</a>
+                        <strong>INCOMPLETE</strong>
+                    </div> 
                 {% else %}
-                    <li><h1>{{task.title}}</h1></li>
-                    <li><a href="{% url 'details' task.id %}">task detail</a></li>
-                    <li><a href="{% url 'delete' task.id %}">Delete task</a></li>
-                    <strong>COMPLETED</strong>
+                    <div class="container">
+                        <li><h1 class="fw-bold text-success">{{task.title}}</h1></li>
+                        <a class="btn btn-primary" href="{% url 'details' task.id %}">task detail</a>
+                        <a class="btn btn-danger" href="{% url 'delete' task.id %}">Delete task</a>
+                        <strong>COMPLETED</strong>
+                    </div>
+                    
                 {% endif %} 
             {% endfor %}
         </ul>

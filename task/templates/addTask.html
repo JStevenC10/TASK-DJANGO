@@ -3,11 +3,13 @@
 {% block title %} Add Task {% endblock %}
 
 {% block content %}
-    {{error}}
-    <form action="{% url 'add_task' %}" method='POST'>
-        {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">Add Task</button>
-    </form>
-    
+    <main class="container mt-5">
+        <h1 class="fw-bold text-info">ADD NEW TASK</h1>
+        {{error}}
+        <form class="card card-body" action="{% url 'add_task' %}" method='POST'>
+            {% csrf_token %}
+            {{form.as_p}}
+            <button class="btn btn-success" type="submit">Add Task</button>
+        </form>
+    </main>
 {% endblock %}
